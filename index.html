@@ -167,9 +167,51 @@
   @media (max-width: 480px) {
     .btn { width: 100%; justify-content: center; text-align: center; }
   }
+
+  /* Scroll animations: only when JS is running and the visitor hasn't asked for reduced motion */
+  .progress { display: none; }
+  @media (prefers-reduced-motion: no-preference) {
+    .js [data-reveal] {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .8s cubic-bezier(.2, .7, .2, 1), transform .8s cubic-bezier(.2, .7, .2, 1);
+      transition-delay: calc(var(--i, 0) * 90ms);
+    }
+    .js [data-reveal].is-in { opacity: 1; transform: none; }
+
+    /* Case card top rule draws in from the left */
+    .js .case { position: relative; border-top-color: transparent; }
+    .js .case::before {
+      content: ""; position: absolute; left: 0; right: 0; top: -4px; height: 4px;
+      background: var(--indigo); transform: scaleX(0); transform-origin: left;
+      transition: transform 1s cubic-bezier(.2, .7, .2, 1) calc(var(--i, 0) * 90ms + 150ms);
+    }
+    .js .case.is-in::before { transform: scaleX(1); }
+
+    /* Pillar rules do the same, more lightly */
+    .js .pillar { position: relative; border-top-color: transparent; }
+    .js .pillar::before {
+      content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 1px;
+      background: #D5D7E6; transform: scaleX(0); transform-origin: left;
+      transition: transform 1.1s cubic-bezier(.2, .7, .2, 1) calc(var(--i, 0) * 90ms);
+    }
+    .js .pillar.is-in::before { transform: scaleX(1); }
+
+    /* Reading progress bar, in browsers with scroll-driven animations */
+    @supports (animation-timeline: scroll()) {
+      .progress {
+        display: block; position: fixed; inset: 0 0 auto 0; height: 3px; z-index: 20;
+        background: var(--indigo); transform-origin: left; transform: scaleX(0);
+        animation: progress linear both; animation-timeline: scroll(root);
+      }
+      @keyframes progress { to { transform: scaleX(1); } }
+    }
+  }
 </style>
+<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
+<div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to content</a>
 
 <div class="wrap">
@@ -187,7 +229,7 @@
 </div>
 
 <main id="main">
-  <section id="top" class="wrap hero" aria-labelledby="hero-title">
+  <section id="top" class="wrap hero" aria-labelledby="hero-title" data-reveal-group>
     <p class="eyebrow">Elearning &amp; instructional design</p>
     <h1 id="hero-title">Elearning design for the global eye health and disability sector</h1>
     <p class="lede">I'm an optometrist and instructional designer helping NGOs, foundations and health organisations turn specialist knowledge into practical, accessible learning, from refraction curricula to advocacy courses and accessibility training.</p>
@@ -195,7 +237,7 @@
   </section>
 
   <section class="band-indigo section" aria-labelledby="problem-title">
-    <div class="wrap split">
+    <div class="wrap split" data-reveal-group>
       <h2 id="problem-title" class="label">The problem I solve</h2>
       <p class="statement">Specialist knowledge is often held by a few experts or buried in outdated resources. I turn it into structured, engaging learning for frontline staff, volunteers and global teams, including in low-resource and multilingual settings.</p>
     </div>
@@ -203,8 +245,8 @@
 
   <section id="work" class="band-tint section" aria-labelledby="work-title">
     <div class="wrap">
-      <h2 id="work-title" class="label section-head">Selected work</h2>
-      <ol class="cases">
+      <h2 id="work-title" class="label section-head" data-reveal>Selected work</h2>
+      <ol class="cases" data-reveal-group>
         <li class="case">
           <div>
             <span class="case-num" aria-hidden="true">01</span>
@@ -260,8 +302,8 @@
 
   <section id="approach" class="band-grey section" aria-labelledby="approach-title">
     <div class="wrap">
-      <h2 id="approach-title" class="label section-head">Why work with me</h2>
-      <ul class="pillars">
+      <h2 id="approach-title" class="label section-head" data-reveal>Why work with me</h2>
+      <ul class="pillars" data-reveal-group>
         <li class="pillar">
           <span class="pillar-num" aria-hidden="true">01</span>
           <h3>Sector fluency</h3>
@@ -287,7 +329,7 @@
   </section>
 
   <section id="about" class="wrap section about" aria-labelledby="about-title">
-    <div class="split">
+    <div class="split" data-reveal-group>
       <h2 id="about-title" class="label">About</h2>
       <div class="about-body">
         <p>I'm an optometrist, elearning developer and instructional designer. I take projects from concept through to evaluation, combining clinical understanding with technical development skills to create learning that improves performance, not just looks good.</p>
@@ -297,7 +339,7 @@
   </section>
 
   <section id="contact" class="band-deep section" aria-labelledby="contact-title">
-    <div class="wrap contact">
+    <div class="wrap contact" data-reveal-group>
       <h2 id="contact-title">Tell me about your training challenge.</h2>
       <p>Whether it's a curriculum, a compliance course or an accessibility problem, send a brief outline and I'll get back to you promptly.</p>
       <div class="contact-actions">
@@ -314,5 +356,28 @@
     <span>Geelong, Victoria, Australia | Working globally</span>
   </footer>
 </div>
+<script>
+  (function () {
+    document.querySelectorAll('[data-reveal-group] > *').forEach(function (el) {
+      el.setAttribute('data-reveal', '');
+    });
+    var items = document.querySelectorAll('[data-reveal]');
+    if (!('IntersectionObserver' in window)) {
+      items.forEach(function (el) { el.classList.add('is-in'); });
+      return;
+    }
+    // Items that come into view together are staggered in document order
+    var io = new IntersectionObserver(function (entries) {
+      var n = 0;
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.style.setProperty('--i', n++);
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+    items.forEach(function (el) { io.observe(el); });
+  })();
+</script>
 </body>
 </html>
