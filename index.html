@@ -109,19 +109,7 @@
     display: grid; gap: clamp(40px, 5vw, 72px);
   }
   .hero-main { display: grid; gap: clamp(24px, 3vw, 36px); align-content: start; }
-  @media (min-width: 1000px) {
-    .hero { grid-template-columns: minmax(0, 1fr) 300px; align-items: end; }
-  }
-  .hero-aside { border-top: 1px solid var(--line); padding-top: 20px; display: grid; gap: 14px; align-content: start; }
-  .hero-aside ul { list-style: none; margin: 0; padding: 0; }
-  .hero-aside li { border-bottom: 1px solid var(--line); }
-  .hero-aside li a {
-    display: flex; justify-content: space-between; gap: 16px; align-items: baseline;
-    padding-block: 12px; color: var(--ink); text-decoration: none; font-weight: 500;
-  }
-  .hero-aside li a span { font-size: 13px; font-variant-numeric: tabular-nums; color: var(--ink-3); }
-  .hero-aside li a:hover { color: var(--indigo); }
-  .hero-aside li a:hover span { color: var(--indigo); }
+  .hero-clients { font-size: 15px; line-height: 1.6; color: var(--ink-3); max-width: 80ch; text-wrap: pretty; }
   .hero h1 {
     font-size: clamp(36px, 6.4vw, 76px); line-height: 1.04; letter-spacing: -0.03em;
     font-weight: 600; max-width: 18ch; text-wrap: balance;
@@ -295,16 +283,8 @@
       <h1 id="hero-title">Elearning design for the global eye health and disability sector</h1>
       <p class="lede">I'm an optometrist and instructional designer helping NGOs, foundations and health organisations turn specialist knowledge into practical, accessible learning, from refraction curricula to advocacy courses and accessibility training.</p>
       <div><a class="btn btn-primary" href="#contact">Contact me <span class="arrow" aria-hidden="true">→</span></a></div>
+      <p class="hero-clients">Recent clients include SEE Together, ZEISS, The Fred Hollows Foundation and Guide&nbsp;Dogs NSW/ACT.</p>
     </div>
-    <aside class="hero-aside" aria-labelledby="clients-title">
-      <h2 id="clients-title" class="eyebrow">Selected clients</h2>
-      <ul>
-        <li><a href="#case-1">SEE Together <span aria-hidden="true">01</span></a></li>
-        <li><a href="#case-2">ZEISS <span aria-hidden="true">02</span></a></li>
-        <li><a href="#case-3">The Fred Hollows Foundation <span aria-hidden="true">03</span></a></li>
-        <li><a href="#case-4">Guide Dogs NSW/ACT <span aria-hidden="true">04</span></a></li>
-      </ul>
-    </aside>
   </section>
 
   <section class="band-indigo section" aria-labelledby="problem-title">
