@@ -399,10 +399,10 @@
       <h2 id="contact-title">Tell me about your training challenge.</h2>
       <p>Whether it's a curriculum, a compliance course or an accessibility problem, send a brief outline and I'll get back to you promptly.</p>
       <div class="contact-actions">
-        <a class="btn btn-light" href="mailto:michael@michaelmorton.com.au?subject=Website%20enquiry">Email me <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="btn btn-light" href="#contact" data-mail>Email me <span class="arrow" aria-hidden="true">→</span></a>
         <a class="btn btn-outline" href="https://www.linkedin.com/in/michaelmortonid/">LinkedIn</a>
       </div>
-      <p class="contact-email">Or write directly to <a href="mailto:michael@michaelmorton.com.au?subject=Website%20enquiry">michael@michaelmorton.com.au</a></p>
+      <p class="contact-email">Or write directly to <a href="#contact" data-mail data-mail-text>michael [at] michaelmorton [dot] com [dot] au</a></p>
     </div>
   </section>
 </main>
@@ -415,6 +415,15 @@
 </div>
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Email address is assembled here so it never appears whole in the page source
+  (function () {
+    var addr = ['michael', 'michaelmorton.com.au'].join('@');
+    document.querySelectorAll('[data-mail]').forEach(function (a) {
+      a.href = 'mailto:' + addr + '?subject=Website%20enquiry';
+      if (a.hasAttribute('data-mail-text')) a.textContent = addr;
+    });
+  })();
 
   // Analytics: record email, LinkedIn and outbound link clicks as events
   document.addEventListener('click', function (e) {
