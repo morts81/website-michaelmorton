@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Michael Morton | Elearning design for eye health and disability</title>
 <meta name="description" content="Elearning and instructional design for the global eye health and disability sector. Curricula, advocacy courses, accessibility training and job aids for NGOs, foundations and health organisations.">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PSDE3CH0GC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PSDE3CH0GC');
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -70,9 +78,31 @@
   .site-nav ul { display: flex; flex-wrap: wrap; gap: 6px 24px; list-style: none; margin: 0; padding: 0; }
   .site-nav a { color: var(--ink-2); text-decoration: none; font-size: 15px; padding-block: 4px; display: inline-block; }
   .site-nav a:hover { color: var(--ink); text-decoration: underline; }
+  @media (max-width: 600px) {
+    .site-header { padding-block: 18px; gap: 6px 20px; }
+    .site-nav ul { gap: 4px 18px; }
+    .site-nav a { font-size: 14px; }
+  }
 
   /* Hero */
-  .hero { padding-block: clamp(56px, 11vw, 128px) clamp(64px, 10vw, 112px); display: grid; gap: clamp(24px, 3vw, 36px); }
+  .hero {
+    padding-block: clamp(36px, 9vw, 112px) clamp(56px, 9vw, 104px);
+    display: grid; gap: clamp(40px, 5vw, 72px);
+  }
+  .hero-main { display: grid; gap: clamp(24px, 3vw, 36px); align-content: start; }
+  @media (min-width: 1000px) {
+    .hero { grid-template-columns: minmax(0, 1fr) 300px; align-items: end; }
+  }
+  .hero-aside { border-top: 1px solid var(--line); padding-top: 20px; display: grid; gap: 14px; align-content: start; }
+  .hero-aside ul { list-style: none; margin: 0; padding: 0; }
+  .hero-aside li { border-bottom: 1px solid var(--line); }
+  .hero-aside li a {
+    display: flex; justify-content: space-between; gap: 16px; align-items: baseline;
+    padding-block: 12px; color: var(--ink); text-decoration: none; font-weight: 500;
+  }
+  .hero-aside li a span { font-family: var(--mono); font-size: 13px; color: var(--ink-3); }
+  .hero-aside li a:hover { color: var(--indigo); }
+  .hero-aside li a:hover span { color: var(--indigo); }
   .hero h1 {
     font-size: clamp(36px, 6.4vw, 76px); line-height: 1.04; letter-spacing: -0.03em;
     font-weight: 600; max-width: 18ch; text-wrap: balance;
@@ -99,15 +129,22 @@
   /* Problem band */
   .band-indigo { background: var(--indigo); color: #F2F1F8; }
   .band-indigo .label { color: var(--indigo-soft); }
+  .band-indigo.section { padding-block: clamp(56px, 8vw, 88px); }
+  .statement-wrap { display: grid; gap: 18px; }
   .statement {
-    font-size: clamp(21px, 2.5vw, 30px); line-height: 1.45; letter-spacing: -0.015em;
-    max-width: 38ch; text-wrap: pretty;
+    font-size: clamp(24px, 3vw, 36px); line-height: 1.25; letter-spacing: -0.02em;
+    font-weight: 500; max-width: 26ch; text-wrap: balance; color: var(--white);
+  }
+  .statement-sub {
+    font-size: clamp(17px, 1.8vw, 20px); line-height: 1.55; color: #D9DAF0;
+    max-width: 52ch; text-wrap: pretty;
   }
 
   /* Work */
   .band-tint { background: var(--indigo-tint); }
   .band-tint .label, .band-grey .label { color: var(--indigo); }
   .section-head { margin-bottom: clamp(32px, 4vw, 48px); }
+  .case { scroll-margin-top: 24px; }
   .cases { display: grid; gap: 20px; list-style: none; margin: 0; padding: 0; }
   .case {
     background: var(--white); border-top: 4px solid var(--indigo);
@@ -153,7 +190,10 @@
   .contact h2 { font-size: clamp(30px, 4.4vw, 48px); line-height: 1.1; letter-spacing: -0.025em; font-weight: 600; max-width: 20ch; text-wrap: balance; }
   .contact p { font-size: clamp(17px, 1.8vw, 19px); color: #D9DAF0; max-width: 58ch; text-wrap: pretty; }
   .contact-actions { display: flex; flex-wrap: wrap; gap: 14px; padding-top: 8px; }
-  .btn-light { background: var(--white); color: var(--indigo-deep); overflow-wrap: anywhere; }
+  .btn-light { background: var(--white); color: var(--indigo-deep); }
+  .contact .contact-email { font-size: 16px; color: #D9DAF0; }
+  .contact .contact-email a { color: var(--white); }
+  .contact .contact-email a:hover { color: #D9DAF0; }
   .btn-light:hover { background: #D9DAF0; color: var(--indigo-deep); }
   .btn-outline { border-color: #8C8FC9; color: var(--white); }
   .btn-outline:hover { border-color: var(--white); color: var(--white); }
@@ -164,8 +204,11 @@
     padding-block: 32px; font-size: 14px; color: var(--ink-3);
   }
 
+  .footer-note { flex-basis: 100%; font-size: 13px; }
+
   @media (max-width: 480px) {
-    .btn { width: 100%; justify-content: center; text-align: center; }
+    .hero .btn { width: 100%; justify-content: center; text-align: center; }
+    .contact-actions .btn { flex: 1 1 0; justify-content: center; padding-inline: 18px; }
   }
 
   /* Scroll animations: only when JS is running and the visitor hasn't asked for reduced motion */
@@ -230,16 +273,30 @@
 
 <main id="main">
   <section id="top" class="wrap hero" aria-labelledby="hero-title" data-reveal-group>
-    <p class="eyebrow">Elearning &amp; instructional design</p>
-    <h1 id="hero-title">Elearning design for the global eye health and disability sector</h1>
-    <p class="lede">I'm an optometrist and instructional designer helping NGOs, foundations and health organisations turn specialist knowledge into practical, accessible learning, from refraction curricula to advocacy courses and accessibility training.</p>
-    <div><a class="btn btn-primary" href="#contact">Contact me <span class="arrow" aria-hidden="true">→</span></a></div>
+    <div class="hero-main">
+      <p class="eyebrow">Elearning &amp; instructional design</p>
+      <h1 id="hero-title">Elearning design for the global eye health and disability sector</h1>
+      <p class="lede">I'm an optometrist and instructional designer helping NGOs, foundations and health organisations turn specialist knowledge into practical, accessible learning, from refraction curricula to advocacy courses and accessibility training.</p>
+      <div><a class="btn btn-primary" href="#contact">Contact me <span class="arrow" aria-hidden="true">→</span></a></div>
+    </div>
+    <aside class="hero-aside" aria-labelledby="clients-title">
+      <h2 id="clients-title" class="eyebrow">Selected clients</h2>
+      <ul>
+        <li><a href="#case-1">SEE Together <span aria-hidden="true">01</span></a></li>
+        <li><a href="#case-2">ZEISS <span aria-hidden="true">02</span></a></li>
+        <li><a href="#case-3">The Fred Hollows Foundation <span aria-hidden="true">03</span></a></li>
+        <li><a href="#case-4">Guide Dogs NSW/ACT <span aria-hidden="true">04</span></a></li>
+      </ul>
+    </aside>
   </section>
 
   <section class="band-indigo section" aria-labelledby="problem-title">
     <div class="wrap split" data-reveal-group>
       <h2 id="problem-title" class="label">The problem I solve</h2>
-      <p class="statement">Specialist knowledge is often held by a few experts or buried in outdated resources. I turn it into structured, engaging learning for frontline staff, volunteers and global teams, including in low-resource and multilingual settings.</p>
+      <div class="statement-wrap">
+        <p class="statement">Specialist knowledge is often held by a few experts or buried in outdated resources.</p>
+        <p class="statement-sub">I turn it into structured, engaging learning for frontline staff, volunteers and global teams, including in low-resource and multilingual settings.</p>
+      </div>
     </div>
   </section>
 
@@ -247,7 +304,7 @@
     <div class="wrap">
       <h2 id="work-title" class="label section-head" data-reveal>Selected work</h2>
       <ol class="cases" data-reveal-group>
-        <li class="case">
+        <li class="case" id="case-1">
           <div>
             <span class="case-num" aria-hidden="true">01</span>
             <h3>SEE Together</h3>
@@ -259,7 +316,7 @@
             <div><dt>Outcome</dt><dd>A consistent training pathway that partner sites can use to prepare new staff, with practical assessment and resources that students and trainers can draw on.</dd></div>
           </dl>
         </li>
-        <li class="case">
+        <li class="case" id="case-2">
           <div>
             <span class="case-num" aria-hidden="true">02</span>
             <h3>ZEISS</h3>
@@ -272,7 +329,7 @@
             <div><dt>Outcome</dt><dd>A self-paced program practitioners can complete around clinic hours, giving ZEISS a consistent education offering across international markets.</dd></div>
           </dl>
         </li>
-        <li class="case">
+        <li class="case" id="case-3">
           <div>
             <span class="case-num" aria-hidden="true">03</span>
             <h3>The Fred Hollows Foundation</h3>
@@ -284,7 +341,7 @@
             <div><dt>Outcome</dt><dd>Country teams have a consistent advocacy course and tools to effectively plan advocacy work, write compelling briefs and prepare for meetings with government and partners.</dd></div>
           </dl>
         </li>
-        <li class="case">
+        <li class="case" id="case-4">
           <div>
             <span class="case-num" aria-hidden="true">04</span>
             <h3>Guide Dogs NSW/ACT</h3>
@@ -343,20 +400,38 @@
       <h2 id="contact-title">Tell me about your training challenge.</h2>
       <p>Whether it's a curriculum, a compliance course or an accessibility problem, send a brief outline and I'll get back to you promptly.</p>
       <div class="contact-actions">
-        <a class="btn btn-light" href="mailto:michael@michaelmorton.com.au?subject=Website%20enquiry">michael@michaelmorton.com.au</a>
+        <a class="btn btn-light" href="mailto:michael@michaelmorton.com.au?subject=Website%20enquiry">Email me <span class="arrow" aria-hidden="true">→</span></a>
         <a class="btn btn-outline" href="https://www.linkedin.com/in/michaelmortonid/">LinkedIn</a>
       </div>
+      <p class="contact-email">Or write directly to <a href="mailto:michael@michaelmorton.com.au?subject=Website%20enquiry">michael@michaelmorton.com.au</a></p>
     </div>
   </section>
 </main>
 
 <div class="wrap">
   <footer class="site-footer">
-    <span>Michael Morton</span>
+    <span>© <span id="year">2026</span> Michael Morton</span>
     <span>Geelong, Victoria, Australia | Working globally</span>
+    <span class="footer-note">This site uses Google Analytics to understand how visitors use it.</span>
   </footer>
 </div>
 <script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Analytics: record email, LinkedIn and outbound link clicks as events
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a || typeof gtag !== 'function') return;
+    var href = a.getAttribute('href');
+    if (href.indexOf('mailto:') === 0) {
+      gtag('event', 'contact_email_click', { link_text: a.textContent.trim() });
+    } else if (href.indexOf('linkedin.com') !== -1) {
+      gtag('event', 'contact_linkedin_click');
+    } else if (/^https?:/.test(href) && a.hostname !== location.hostname) {
+      gtag('event', 'outbound_click', { link_url: href });
+    }
+  });
+
   (function () {
     document.querySelectorAll('[data-reveal-group] > *').forEach(function (el) {
       el.setAttribute('data-reveal', '');
