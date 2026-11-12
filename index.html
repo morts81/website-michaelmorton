@@ -31,7 +31,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --ink: #14171A;
@@ -44,7 +44,6 @@
     --indigo-tint: #ECECF6;
     --indigo-soft: #C6C7E8;
     --line: #E4E0D8;
-    --mono: 'IBM Plex Mono', ui-monospace, monospace;
     --sans: 'Public Sans', Helvetica, Arial, sans-serif;
     --gutter: clamp(20px, 5vw, 40px);
     --section: clamp(64px, 10vw, 112px);
@@ -78,8 +77,8 @@
   .section { padding-block: var(--section); }
 
   .eyebrow {
-    font-family: var(--mono); font-size: 13px; font-weight: 500;
-    letter-spacing: 0.08em; text-transform: uppercase; color: var(--indigo);
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--indigo);
   }
   .label {
     font-size: 15px; font-weight: 600; letter-spacing: 0.02em; color: var(--ink-3);
@@ -120,7 +119,7 @@
     display: flex; justify-content: space-between; gap: 16px; align-items: baseline;
     padding-block: 12px; color: var(--ink); text-decoration: none; font-weight: 500;
   }
-  .hero-aside li a span { font-family: var(--mono); font-size: 13px; color: var(--ink-3); }
+  .hero-aside li a span { font-size: 13px; font-variant-numeric: tabular-nums; color: var(--ink-3); }
   .hero-aside li a:hover { color: var(--indigo); }
   .hero-aside li a:hover span { color: var(--indigo); }
   .hero h1 {
@@ -137,7 +136,6 @@
   }
   .btn-primary { background: var(--indigo); color: var(--paper); }
   .btn-primary:hover { background: var(--ink); color: var(--paper); }
-  .btn .arrow { font-family: var(--mono); }
 
   /* Split rows: label beside content on wide screens, stacked on narrow */
   .split { display: grid; gap: 16px; }
@@ -174,7 +172,7 @@
   @media (min-width: 960px) {
     .case { grid-template-columns: 280px minmax(0, 1fr); gap: 56px; }
   }
-  .case-num { font-family: var(--mono); font-size: 13px; color: var(--ink-3); margin-bottom: 10px; display: block; }
+  .case-num { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; font-variant-numeric: tabular-nums; color: var(--ink-3); margin-bottom: 10px; display: block; }
   .case h3 { font-size: clamp(21px, 2.2vw, 24px); font-weight: 600; letter-spacing: -0.015em; color: var(--indigo); line-height: 1.25; }
   .case-title { font-size: 16px; color: var(--ink-2); margin-top: 6px; }
   .case-project-link { font-size: 15px; font-weight: 600; margin-top: 18px; }
@@ -184,8 +182,8 @@
     .case dl > div { grid-template-columns: 130px minmax(0, 1fr); gap: 20px; }
   }
   .case dt {
-    font-family: var(--mono); font-size: 12px; font-weight: 500;
-    letter-spacing: 0.1em; text-transform: uppercase; color: var(--indigo); padding-top: 3px;
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--indigo); padding-top: 3px;
   }
   .case dd { margin: 0; font-size: 16px; line-height: 1.65; color: var(--ink-2); max-width: 64ch; }
 
@@ -194,7 +192,7 @@
   .pillars { display: grid; gap: 40px 56px; list-style: none; margin: 0; padding: 0; }
   @media (min-width: 720px) { .pillars { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   .pillar { border-top: 1px solid #D5D7E6; padding-top: 22px; display: grid; gap: 12px; align-content: start; }
-  .pillar-num { font-family: var(--mono); font-size: 13px; color: var(--indigo); }
+  .pillar-num { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; font-variant-numeric: tabular-nums; color: var(--indigo); }
   .pillar h3 { font-size: 21px; font-weight: 600; letter-spacing: -0.015em; line-height: 1.3; }
   .pillar p { font-size: 16px; line-height: 1.65; color: var(--ink-2); max-width: 52ch; text-wrap: pretty; }
 
